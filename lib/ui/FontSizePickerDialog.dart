@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tafsir_albaqara/bloc/font_size_bloc.dart';
+import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
 
 
 class FontSizePickerDialog extends StatelessWidget {

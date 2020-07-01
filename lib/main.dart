@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tafsir_albaqara/bloc/font_size_bloc.dart';
+import 'package:tafsir_albaqara/bloc/content_bloc/content_bloc.dart';
+import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
 import 'package:tafsir_albaqara/screens/ContentPage.dart';
 import 'package:tafsir_albaqara/ui/DynamicThemeIconButton.dart';
 import 'package:tafsir_albaqara/ui/GradientButton.dart';
@@ -27,8 +28,14 @@ class _MyAppState extends State<MyApp> {
               accentColor: Colors.indigo,
             ),
         themedWidgetBuilder: (context, theme) {
-          return BlocProvider<FontSizeBloc>(
-            create: (context) => FontSizeBloc()..add(AppStarted()),
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider<FontSizeBloc>(
+                  create: (context) => FontSizeBloc()..add(AppStarted())),
+              BlocProvider<ContentBloc>(
+                create: (context) => ContentBloc()..add(AppLaunched()),
+              )
+            ],
             child: new MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: theme,
@@ -36,6 +43,15 @@ class _MyAppState extends State<MyApp> {
               home: MyHomePage(title: 'Тафсир суры аль-Бакара'),
             ),
           );
+          // return BlocProvider<FontSizeBloc>(
+          //   create: (context) => FontSizeBloc()..add(AppStarted()),
+          //   child: new MaterialApp(
+          //     debugShowCheckedModeBanner: false,
+          //     theme: theme,
+          //     title: 'Тафсир суры аль-Бакара',
+          //     home: MyHomePage(title: 'Тафсир суры аль-Бакара'),
+          //   ),
+          // );
         });
   }
 }

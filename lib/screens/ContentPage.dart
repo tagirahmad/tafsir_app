@@ -1,13 +1,11 @@
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html/dom.dart' as dom;
-import 'package:tafsir_albaqara/bloc/font_size_bloc.dart';
+import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
 import 'package:tafsir_albaqara/ui/DynamicThemeIconButton.dart';
 import 'package:tafsir_albaqara/ui/FontSizeButton.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 // class PageContent extends StatefulWidget {
 //   final String text;
@@ -28,6 +26,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 // }
 
 class PageContent extends StatelessWidget {
+  final String text;
+  final String title;
+  final String chapter;
+  final double initialFontSize = 15;
+  final double lastPos;
+  // final Function() updateMainState;
+  PageContent(
+      {@required this.text,
+      @required this.title,
+      @required this.chapter,
+      this.lastPos,
+      // this.updateMainState
+      });
   // double _fontSize = 15.0;
   // ScrollController controller;
   // double lastPos;
@@ -82,6 +93,8 @@ class PageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final FontSizeBloc fontSizeBloc = BlocProvider.of<FontSizeBloc>(context);
 
+    ScrollController controller = ScrollController();
+
     return Scaffold(
       // floatingActionButton: FloatingActionButton(onPressed: () {
       //   setState(() {
@@ -90,8 +103,8 @@ class PageContent extends StatelessWidget {
       // }),
       appBar: AppBar(
         title: Text(
-          // '${widget.chapter}',
-          'chapter',
+          '$chapter',
+          // 'chapter',
           textAlign: TextAlign.center,
         ),
         actions: <Widget>[
@@ -113,7 +126,7 @@ class PageContent extends StatelessWidget {
       body: BlocBuilder<FontSizeBloc, FontSizeState>(
         builder: (BuildContext context, FontSizeState state) {
           return SingleChildScrollView(
-            // controller: controller,
+            controller: controller,
             child: Container(
               padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
               child: Column(
@@ -125,14 +138,12 @@ class PageContent extends StatelessWidget {
                       padding: const EdgeInsets.all(5.0),
                       child: Center(
                         child: Html(
-                          // data: widget.title,
-                          data: "title",
+                          data: title,
+                          // data: "title",
                           defaultTextStyle: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: state.fontSize
-                              // fontSizeBloc.add(FontSizeIncreased(_fontSize + 5))
-                              // _fontSize + 5
-                              ),
+                            fontWeight: FontWeight.w400,
+                            fontSize: state.fontSize
+                          ),
                           customTextAlign: (dom.Node node) {
                             return TextAlign.center;
                           },
@@ -144,8 +155,7 @@ class PageContent extends StatelessWidget {
                     height: 20.0,
                   ),
                   Html(
-                      // data: widget.text,
-                      data: "Text",
+                      data: text,
                       customTextStyle: (node, baseStyle) {
                         if (node is dom.Element) {
                           switch (node.localName) {
