@@ -43,15 +43,6 @@ class _MyAppState extends State<MyApp> {
               home: MyHomePage(title: 'Тафсир суры аль-Бакара'),
             ),
           );
-          // return BlocProvider<FontSizeBloc>(
-          //   create: (context) => FontSizeBloc()..add(AppStarted()),
-          //   child: new MaterialApp(
-          //     debugShowCheckedModeBanner: false,
-          //     theme: theme,
-          //     title: 'Тафсир суры аль-Бакара',
-          //     home: MyHomePage(title: 'Тафсир суры аль-Бакара'),
-          //   ),
-          // );
         });
   }
 }
@@ -76,9 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String title;
   Future<List> list;
   SharedPreferences prefs;
-  // List<dynamic> list;
 
-  // Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   @override
   void initState() {
     super.initState();
@@ -151,16 +140,16 @@ class _MyHomePageState extends State<MyHomePage> {
         // double lastPos = prefs.getDouble("lastPos");
         // getLastPos();
 
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => PageContent(
-                    // chapter: lastChapter,
-                    // text: text,
-                    // title: title,
-                    // lastPos: lastPos,
-                    // updateMainState: update,
-                    )));
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => PageContent(
+        // chapter: lastChapter,
+        // text: text,
+        // title: title,
+        // lastPos: lastPos,
+        // updateMainState: update,
+        // )));
       },
     );
     // } else {
@@ -184,12 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         actions: <Widget>[DynamicThemeIconButton(), SettingsIconButton()],
       ),
-      body:
-          //  FutureBuilder(
-          //   future: list,
-          //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-          //     return
-          Container(
+      body: Container(
         padding: const EdgeInsets.all(10.0),
         child: ListView(
           children: <Widget>[
@@ -220,9 +204,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      // },
     );
-    // );
-    // }
   }
 }

@@ -7,49 +7,18 @@ import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
 import 'package:tafsir_albaqara/ui/DynamicThemeIconButton.dart';
 import 'package:tafsir_albaqara/ui/FontSizeButton.dart';
 
-// class PageContent extends StatefulWidget {
-//   final String text;
-//   final String title;
-//   final String chapter;
-//   final double initialFontSize = 15;
-//   final double lastPos;
-//   final Function() updateMainState;
-//   PageContent(
-//       {@required this.text,
-//       @required this.title,
-//       @required this.chapter,
-//       this.lastPos,
-//       this.updateMainState});
-
-//   @override
-//   _PageContentState createState() => _PageContentState();
-// }
-
 class PageContent extends StatelessWidget {
   final String text;
   final String title;
   final String chapter;
   final double initialFontSize = 15;
   final double lastPos;
-  // final Function() updateMainState;
-  PageContent(
-      {@required this.text,
-      @required this.title,
-      @required this.chapter,
-      this.lastPos,
-      // this.updateMainState
-      });
-  // double _fontSize = 15.0;
-  // ScrollController controller;
-  // double lastPos;
-
-  // void getFontSize() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   double size = (prefs.getDouble('fontSizeStore') ?? 15);
-  //   setState(() {
-  //     _fontSize = size;
-  //   });
-  // }
+  PageContent({
+    @required this.text,
+    @required this.title,
+    @required this.chapter,
+    this.lastPos
+  });
 
   // @override
   // void initState() {
@@ -58,12 +27,6 @@ class PageContent extends StatelessWidget {
   //   // getLastPos();
   //   // checkLastPos();
   //   super.initState();
-  // }
-
-  // void updateState(double fontSize) async {
-  //   setState(() {
-  //     _fontSize = fontSize;
-  //   });
   // }
 
   // void saveLastPos() async {
@@ -96,21 +59,13 @@ class PageContent extends StatelessWidget {
     ScrollController controller = ScrollController();
 
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(onPressed: () {
-      //   setState(() {
-
-      //   });
-      // }),
       appBar: AppBar(
         title: Text(
           '$chapter',
-          // 'chapter',
           textAlign: TextAlign.center,
         ),
         actions: <Widget>[
-          FontSizeButton(
-            // updateState: updateState,
-          ),
+          FontSizeButton(),
           DynamicThemeIconButton(),
           IconButton(
               icon: Icon(Icons.bookmark),
@@ -119,7 +74,7 @@ class PageContent extends StatelessWidget {
                 // double lastPos = prefs.getDouble("lastPos");
                 // controller
                 //     .jumpTo(lastPos);
-                // saveLastPos(); 
+                // saveLastPos();
               })
         ],
       ),
@@ -141,9 +96,8 @@ class PageContent extends StatelessWidget {
                           data: title,
                           // data: "title",
                           defaultTextStyle: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: state.fontSize
-                          ),
+                              fontWeight: FontWeight.w400,
+                              fontSize: state.fontSize),
                           customTextAlign: (dom.Node node) {
                             return TextAlign.center;
                           },
@@ -169,7 +123,8 @@ class PageContent extends StatelessWidget {
                         }
                       },
                       defaultTextStyle: TextStyle(
-                          fontWeight: FontWeight.w400, fontSize: state.fontSize),
+                          fontWeight: FontWeight.w400,
+                          fontSize: state.fontSize),
                       customTextAlign: (dom.Node node) {
                         if (node is dom.Element) {
                           switch (node.localName) {

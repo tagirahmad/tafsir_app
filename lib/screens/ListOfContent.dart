@@ -14,8 +14,6 @@ class ListOfContent extends StatelessWidget {
     return await rootBundle.loadString('lib/content/content.json');
   }
 
-  // List data;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,50 +63,6 @@ class ListOfContent extends StatelessWidget {
                 },
               );
             }
-
-            // FutureBuilder(
-            //   future: DefaultAssetBundle.of(context)
-            //       .loadString('assets/content.json'),
-            //   builder: (context, snapshot) {
-            //     if (!snapshot.hasData) {
-            //       return CircularProgressIndicator();
-            //     }
-            //     var myData = json.decode(snapshot.data);
-            //     return ListView.builder(
-            //       itemBuilder: (BuildContext context, int index) {
-            //         return Column(
-            //           children: <Widget>[
-            //             Card(
-            //               child: ListTile(
-            //                 title: Text(
-            //                   '${myData[index]['chapter']}',
-            //                   style: TextStyle(fontSize: 13),
-            //                 ),
-            //                 subtitle: Text(
-            //                   '${myData[index]['title']}',
-            //                   textAlign: TextAlign.left,
-            //                   style: TextStyle(fontSize: 16),
-            //                 ),
-            //                 onTap: () {
-            //                   Navigator.push(
-            //                       context,
-            //                       MaterialPageRoute(
-            //                           builder: (context) => PageContent(
-            //                                 text: myData[index]['text'],
-            //                                 title:
-            //                                     myData[index]['title'].toString(),
-            //                                 chapter: myData[index]['chapter'],
-            //                               )));
-            //                 },
-            //               ),
-            //             ),
-            //           ],
-            //         );
-            //       },
-            //       itemCount: myData == null ? 0 : myData.length,
-            //     );
-            //   },
-            // ),
           }),
         ));
   }
