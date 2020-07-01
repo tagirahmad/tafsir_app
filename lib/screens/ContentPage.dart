@@ -1,136 +1,180 @@
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:tafsir_albaqara/bloc/font_size_bloc.dart';
 import 'package:tafsir_albaqara/ui/DynamicThemeIconButton.dart';
 import 'package:tafsir_albaqara/ui/FontSizeButton.dart';
-import 'package:tafsir_albaqara/ui/FontSizePickerDialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PageContent extends StatefulWidget {
-  final String text;
-  final String title;
-  final String chapter;
-  final double initialFontSize = 15;
-  PageContent(
-      {@required this.text, @required this.title, @required this.chapter});
+// class PageContent extends StatefulWidget {
+//   final String text;
+//   final String title;
+//   final String chapter;
+//   final double initialFontSize = 15;
+//   final double lastPos;
+//   final Function() updateMainState;
+//   PageContent(
+//       {@required this.text,
+//       @required this.title,
+//       @required this.chapter,
+//       this.lastPos,
+//       this.updateMainState});
 
-  @override
-  _PageContentState createState() => _PageContentState();
-}
+//   @override
+//   _PageContentState createState() => _PageContentState();
+// }
 
-class _PageContentState extends State<PageContent> {
-  double _fontSize = 15.0;
-  // double size;
-  ScrollController controller;
+class PageContent extends StatelessWidget {
+  // double _fontSize = 15.0;
+  // ScrollController controller;
+  // double lastPos;
+
+  // void getFontSize() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   double size = (prefs.getDouble('fontSizeStore') ?? 15);
+  //   setState(() {
+  //     _fontSize = size;
+  //   });
+  // }
+
+  // @override
+  // void initState() {
+  //   getFontSize();
+  //   controller = ScrollController();
+  //   // getLastPos();
+  //   // checkLastPos();
+  //   super.initState();
+  // }
+
   // void updateState(double fontSize) async {
   //   setState(() {
   //     _fontSize = fontSize;
   //   });
   // }
 
-  // void _showFontSizePickerDialog() async {
-  //   final selectedFontSize = await showDialog<double>(
-  //     context: context,
-  //     builder: (context) => FontSizePickerDialog(
-  //       initialFontSize: _fontSize,
-  //       updateTextFunction: updateState,
-  //     ),
-  //   );
-  //   if (selectedFontSize != null) {
-  //     setState(() {
-  //       _fontSize = selectedFontSize;
-  //     });
+  // void saveLastPos() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   await prefs.setDouble('lastPos', controller.offset);
+  //   await prefs.setString("lastChapter", widget.chapter);
+  //   await prefs.setString("text", widget.text);
+  //   await prefs.setString("title", widget.title);
+  //   print(prefs.getDouble("lastPos"));
+  //   print(prefs.getString("lastChapter"));
+  //   // widget.updateMainState();
+  // }
+
+  // Future<void> checkLastPos() async {
+  //   print("${widget.lastPos} is lastpos");
+  //   if (widget.lastPos != 0) {
+  //     controller.jumpTo(widget.lastPos);
+  //   } else {
+  //     // final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //     // lastPos =  prefs.getDouble('lastPos' ?? 0);
+  //     // controller.jumpTo(lastPos);
+  //     controller.jumpTo(0);
   //   }
   // }
 
-  void getFontSize() async {
-    final prefs = await SharedPreferences.getInstance();
-    double size = (prefs.getDouble('fontSizeStore') ?? 15);
-    setState(() {
-      _fontSize = size;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getFontSize();
-  }
-void updateState(double fontSize) async {
-    setState(() {
-      _fontSize = fontSize;
-    });
-  }
   @override
   Widget build(BuildContext context) {
+    final FontSizeBloc fontSizeBloc = BlocProvider.of<FontSizeBloc>(context);
+
     return Scaffold(
+      // floatingActionButton: FloatingActionButton(onPressed: () {
+      //   setState(() {
+
+      //   });
+      // }),
       appBar: AppBar(
         title: Text(
-          '${widget.chapter}',
+          // '${widget.chapter}',
+          'chapter',
           textAlign: TextAlign.center,
         ),
         actions: <Widget>[
-          FontSizeButton(updateState: updateState,),
+          FontSizeButton(
+            // updateState: updateState,
+          ),
           DynamicThemeIconButton(),
+          IconButton(
+              icon: Icon(Icons.bookmark),
+              onPressed: () {
+                // final SharedPreferences prefs = await SharedPreferences.getInstance();
+                // double lastPos = prefs.getDouble("lastPos");
+                // controller
+                //     .jumpTo(lastPos);
+                // saveLastPos(); 
+              })
         ],
       ),
-      body: SingleChildScrollView(
-        controller: controller,
-        child: Container(
-          padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Center(
-                    child: Html(
-                      data: widget.title,
-                      defaultTextStyle:
-                          TextStyle(fontWeight: FontWeight.w400, fontSize: _fontSize +5),
-                      customTextAlign: (dom.Node node) {
-                        return TextAlign.center;
-                      },
+      body: BlocBuilder<FontSizeBloc, FontSizeState>(
+        builder: (BuildContext context, FontSizeState state) {
+          return SingleChildScrollView(
+            // controller: controller,
+            child: Container(
+              padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Center(
+                        child: Html(
+                          // data: widget.title,
+                          data: "title",
+                          defaultTextStyle: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: state.fontSize
+                              // fontSizeBloc.add(FontSizeIncreased(_fontSize + 5))
+                              // _fontSize + 5
+                              ),
+                          customTextAlign: (dom.Node node) {
+                            return TextAlign.center;
+                          },
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  Divider(
+                    height: 20.0,
+                  ),
+                  Html(
+                      // data: widget.text,
+                      data: "Text",
+                      customTextStyle: (node, baseStyle) {
+                        if (node is dom.Element) {
+                          switch (node.localName) {
+                            case "h2":
+                              return TextStyle(fontSize: state.fontSize + 10);
+                            case "h3":
+                              return TextStyle(fontSize: state.fontSize + 6);
+                            case "h4":
+                              return TextStyle(fontSize: state.fontSize + 3);
+                          }
+                        }
+                      },
+                      defaultTextStyle: TextStyle(
+                          fontWeight: FontWeight.w400, fontSize: state.fontSize),
+                      customTextAlign: (dom.Node node) {
+                        if (node is dom.Element) {
+                          switch (node.localName) {
+                            case "h2":
+                              return TextAlign.center;
+                            case "h3":
+                              return TextAlign.center;
+                          }
+                        }
+                      })
+                ],
               ),
-              Divider(
-                height: 20.0,
-              ),
-              Html(
-                  data: widget.text,
-                  customTextStyle: (node, baseStyle) {
-                    if (node is dom.Element) {
-                      switch (node.localName) {
-                        case "h2":
-                          return TextStyle(fontSize: _fontSize + 10);
-                        case "h3":
-                          return TextStyle(fontSize: _fontSize + 6);
-                        case "h4":
-                          return TextStyle(fontSize: _fontSize + 3);
-                      }
-                    }
-                  },
-                  defaultTextStyle: TextStyle(
-                      fontWeight: FontWeight.w400, fontSize: _fontSize),
-                  customTextAlign: (dom.Node node) {
-                    if (node is dom.Element) {
-                      switch (node.localName) {
-                        case "h2":
-                          return TextAlign.center;
-                        case "h3":
-                          return TextAlign.center;
-                      }
-                    }
-                  })
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
