@@ -60,10 +60,10 @@ class PageContent extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          '$chapter',
-          textAlign: TextAlign.center,
-        ),
+        // title: Text(
+        //   '$chapter',
+        //   textAlign: TextAlign.center,
+        // ),
         actions: <Widget>[
           FontSizeButton(),
           DynamicThemeIconButton(),
@@ -118,7 +118,7 @@ class PageContent extends StatelessWidget {
                             case "h3":
                               return TextStyle(fontSize: state.fontSize + 6);
                             case "h4":
-                              return TextStyle(fontSize: state.fontSize + 3);
+                              return TextStyle(fontSize: state.fontSize + 3, fontWeight: FontWeight.bold);
                           }
                         }
                       },

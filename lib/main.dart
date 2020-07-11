@@ -5,10 +5,11 @@ import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tafsir_albaqara/bloc/content_bloc/content_bloc.dart';
 import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
-import 'package:tafsir_albaqara/screens/ContentPage.dart';
 import 'package:tafsir_albaqara/ui/DynamicThemeIconButton.dart';
 import 'package:tafsir_albaqara/ui/GradientButton.dart';
 import 'package:tafsir_albaqara/ui/SettingsIconButton.dart';
+import 'package:google_fonts_arabic/fonts.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,6 +27,9 @@ class _MyAppState extends State<MyApp> {
               primarySwatch: Colors.indigo,
               brightness: brightness,
               accentColor: Colors.indigo,
+              // textTheme: GoogleFonts.sourceSansProTextTheme(
+              //   Theme.of(context).textTheme,
+              // ),
             ),
         themedWidgetBuilder: (context, theme) {
           return MultiBlocProvider(
@@ -175,33 +179,53 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Container(
         padding: const EdgeInsets.all(10.0),
-        child: ListView(
-          children: <Widget>[
-            Flexible(
-                child: Text(
-              " تفسير سورة البقرة ",
-              style: new TextStyle(
-                  fontSize: 35.0,
-                  fontWeight: FontWeight.bold,
-                  foreground: Paint()..shader = linearGradient),
-            )),
-            Flexible(
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    'Сообщается, что ан-Наууас ибн Сам’ан, да будет доволен им Аллах, сказал: “Я слышал, как посланник Аллаха ﷺ сказал: «В День воскрешения приведут Коран и тех, кто в мире этом поступал в соответствии с ним, а впереди него будут идти суры “Корова” и “Семейство Имрана»”. Муслим 805.',
-                    style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        fontSize: fontSize,
-                        fontWeight: FontWeight.w500),
-                    textAlign: TextAlign.left,
-                  ),
-                  GradientButton()
-                ],
+        child: Center(
+          child: Column(
+            children: [
+              Flexible(
+                  flex: 2,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Text(
+                        " تفسير سورة البقرة ",
+                        style: new TextStyle(
+                            fontSize: 50.0,
+                            fontFamily: ArabicFonts.Mirza,
+                            package: 'google_fonts_arabic',
+                            fontWeight: FontWeight.bold,
+                            foreground: Paint()..shader = linearGradient),
+                      ),
+                    ),
+                  )),
+              Flexible(
+                flex: 3,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Text(
+                      'Сообщается, что ан-Наууас ибн Сам’ан, да будет доволен им Аллах, сказал: “Я слышал, как посланник Аллаха ﷺ сказал: «В День воскрешения приведут Коран и тех, кто в мире этом поступал в соответствии с ним, а впереди него будут идти суры “Корова” и “Семейство Имрана»”. Муслим 805.',
+                      style:
+                          // GoogleFonts.sahitya(
+                          //   fontStyle: FontStyle.italic,
+                          //     fontSize: fontSize,
+                          //     fontWeight: FontWeight.w500
+                          // ),
+                          // ),
+                          TextStyle(
+                              fontStyle: FontStyle.italic,
+                              fontSize: fontSize,
+                              fontWeight: FontWeight.w500),
+                      textAlign: TextAlign.left,
+                    ),
+                    GradientButton()
+                  ],
+                ),
               ),
-            ),
-            Flexible(child: showButton(lastPos))
-          ],
+              // Flexible(child: showButton(lastPos))
+            ],
+          ),
         ),
       ),
     );

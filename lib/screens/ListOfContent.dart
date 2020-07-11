@@ -6,6 +6,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tafsir_albaqara/bloc/content_bloc/content_bloc.dart';
 import 'package:tafsir_albaqara/screens/ContentPage.dart';
+import 'package:tafsir_albaqara/ui/ChapterCard.dart';
 import 'package:tafsir_albaqara/ui/DynamicThemeIconButton.dart';
 import 'package:tafsir_albaqara/ui/SettingsIconButton.dart';
 
@@ -34,30 +35,11 @@ class ListOfContent extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: <Widget>[
-                      Card(
-                        child: ListTile(
-                          title: Text(
-                            '${state.data[index]['chapter']}',
-                            style: TextStyle(fontSize: 13),
-                          ),
-                          subtitle: Text(
-                            '${state.data[index]['title']}',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => PageContent(
-                                          text: state.data[index]['text'],
-                                          title: state.data[index]['title']
-                                              .toString(),
-                                          chapter: state.data[index]['chapter'],
-                                        )));
-                          },
-                        ),
-                      ),
+                      ChapterCard(
+                        chapter: state.data[index]['chapter'],
+                        text: state.data[index]['text'],
+                        title: state.data[index]['title']
+                      )  
                     ],
                   );
                 },
