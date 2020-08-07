@@ -7,6 +7,7 @@ class FontSizePickerDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
+    // ignore: close_sinks
     final FontSizeBloc fontSizeBloc = BlocProvider.of<FontSizeBloc>(context);
 
     return AlertDialog(
@@ -27,7 +28,6 @@ class FontSizePickerDialog extends StatelessWidget {
                 activeColor: Colors.indigo,
                 onChanged: (double value) {
                   fontSizeBloc.add(FontSizeChanged(value));
-                  print(state.fontSize);
                 },
               ));
         },

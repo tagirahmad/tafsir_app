@@ -1,11 +1,8 @@
-import 'dart:convert';
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tafsir_albaqara/bloc/content_bloc/content_bloc.dart';
-import 'package:tafsir_albaqara/screens/ContentPage.dart';
 import 'package:tafsir_albaqara/ui/ChapterCard.dart';
 import 'package:tafsir_albaqara/ui/DynamicThemeIconButton.dart';
 import 'package:tafsir_albaqara/ui/SettingsIconButton.dart';
@@ -24,6 +21,7 @@ class ListOfContent extends StatelessWidget {
         ),
         body: Container(
           child:
+              // ignore: missing_return
               BlocBuilder<ContentBloc, ContentState>(builder: (context, state) {
             if (state is ContentLoadInProgress) {
               return Center(
