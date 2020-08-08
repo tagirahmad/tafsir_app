@@ -5,6 +5,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:tafsir_albaqara/bloc/bookmark_bloc/bookmark_bloc.dart';
 import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
+import 'package:tafsir_albaqara/statics/styles.dart';
 import 'package:tafsir_albaqara/ui/DynamicThemeIconButton.dart';
 import 'package:tafsir_albaqara/ui/FontSizeButton.dart';
 
@@ -28,6 +29,7 @@ class PageContent extends StatelessWidget {
         title: Text(
           '$chapter',
           textAlign: TextAlign.center,
+          style: TextStyle(fontSize: appBarTitleFs),
         ),
         actions: <Widget>[
           FontSizeButton(),

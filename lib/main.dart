@@ -4,7 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tafsir_albaqara/bloc/content_bloc/content_bloc.dart';
 import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
 import 'package:tafsir_albaqara/bloc/bookmark_bloc/bookmark_bloc.dart';
+import 'package:tafsir_albaqara/configs/size_config.dart';
 import 'package:tafsir_albaqara/screens/ContentPage.dart';
+import 'package:tafsir_albaqara/statics/global_constants.dart';
+import 'package:tafsir_albaqara/statics/styles.dart';
 import 'package:tafsir_albaqara/ui/DynamicThemeIconButton.dart';
 import 'package:tafsir_albaqara/ui/GradientButton.dart';
 import 'package:tafsir_albaqara/ui/SettingsIconButton.dart';
@@ -51,7 +54,7 @@ class _MyAppState extends State<MyApp> {
 
 // ignore: must_be_immutable
 class MyHomePage extends StatelessWidget {
-  double fontSize = 16;
+  // double fontSize = 16;
 
   final Shader linearGradient = LinearGradient(
     colors: <Color>[
@@ -63,12 +66,12 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BookmarkBloc bookmarkBloc = BlocProvider.of<BookmarkBloc>(context);
-
+    SizeConfig().init(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Тафсир Суры аль-Бакара',
+          GlobalConstants.russianTitle,
+          style: TextStyle(fontSize: appBarTitleFs),
         ),
         actions: <Widget>[DynamicThemeIconButton(), SettingsIconButton()],
       ),
@@ -84,9 +87,9 @@ class MyHomePage extends StatelessWidget {
                     child: FittedBox(
                       fit: BoxFit.fitWidth,
                       child: Text(
-                        " تفسير سورة البقرة ",
+                        GlobalConstants.arabicTitle,
                         style: new TextStyle(
-                            fontSize: 50.0,
+                            fontSize: homeArabicFs,
                             fontFamily: ArabicFonts.Mirza,
                             package: 'google_fonts_arabic',
                             fontWeight: FontWeight.bold,
@@ -100,10 +103,10 @@ class MyHomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Text(
-                      'Сообщается, что ан-Наууас ибн Сам’ан, да будет доволен им Аллах, сказал: “Я слышал, как посланник Аллаха ﷺ сказал: «В День воскрешения приведут Коран и тех, кто в мире этом поступал в соответствии с ним, а впереди него будут идти суры “Корова” и “Семейство Имрана»”. Муслим 805.',
+                      GlobalConstants.homeHadis,
                       style: TextStyle(
                           fontStyle: FontStyle.italic,
-                          fontSize: fontSize,
+                          fontSize: homeHadisFs,
                           fontWeight: FontWeight.w500),
                       textAlign: TextAlign.left,
                     ),
@@ -113,16 +116,25 @@ class MyHomePage extends StatelessWidget {
               ),
               BlocBuilder<BookmarkBloc, BookmarkState>(
                 builder: (context, state) {
-                  if (state is BookmarkLoadSuccess) {
+                  if (state is BookmarkInitial) {
+                    return Container(
+                      width: 0,
+                      height: 0,
+                    );
+                  } else if (state is BookmarkNoContent) {
+                    return Container(
+                      width: 0,
+                      height: 0,
+                    );
+                  } else if (state is BookmarkLoadSuccess) {
                     return Flexible(
-                        child: RaisedButton(
+                        child: MaterialButton(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
-                      elevation: 3.0,
+                      // elevation: 3.0,
                       padding: const EdgeInsets.all(0.0),
-                      child: Container(
-                        padding: const EdgeInsets.all(10.0),
+                      child: Ink(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           gradient: LinearGradient(
@@ -132,9 +144,17 @@ class MyHomePage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        child: Text(
-                          "Продолжить чтение с последней позиции (${state.lastChapter})",
-                          style: TextStyle(color: Colors.white),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          height: 30,
+                          // padding: const EdgeInsets.all(10.0),
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Продолжить чтение с: ${state.lastChapter}",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: continueReadingBtn),
+                          ),
                         ),
                       ),
                       onPressed: () {
@@ -148,17 +168,35 @@ class MyHomePage extends StatelessWidget {
                                     )));
                       },
                     ));
-                  } else if (state is BookmarkNoContent ||
-                      state is BookmarkInitial) {
-                    return Container(
-                      width: 0,
-                      height: 0,
-                    );
-                  } else if (state is BookmarkSetSuccess) {
-                    bookmarkBloc.add(BookmarkSuccess());
-                    return Container(
-                      child: Text('something went wrong'),
-                    );
+                    //       child: RaisedButton(
+                    //     onPressed: () {},
+                    //     shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(80.0)),
+                    //     padding: const EdgeInsets.all(0.0),
+                    //     child: Ink(
+                    //       decoration: const BoxDecoration(
+                    //         gradient: LinearGradient(
+                    //           colors: <Color>[
+                    //             Colors.indigoAccent,
+                    //             Color(0xFF7630ff),
+                    //           ],
+                    //         ),
+                    //         borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                    //       ),
+                    //       child: Container(
+                    //         constraints: const BoxConstraints(
+                    //             minWidth: 88.0,
+                    //             minHeight:
+                    //                 36.0), // min sizes for Material buttons
+                    //         alignment: Alignment.center,
+                    //         child: const Text(
+                    //           'OK',
+                    //           textAlign: TextAlign.center,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ));
+                    //
                   }
                 },
               )

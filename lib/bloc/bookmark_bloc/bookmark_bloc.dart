@@ -16,7 +16,8 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
   ) async* {
     if (event is BookmarkChanged) {
       yield* _mapBookmarkChanged(event.text, event.lastChapter, event.title);
-    } else if (event is AppStarts || event is BookmarkSuccess) {
+      yield* _getBookmarkFromStore();
+    } else if (event is AppStarts) {
       yield* _getBookmarkFromStore();
     }
   }
@@ -24,24 +25,28 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
   Stream<BookmarkState> _mapBookmarkChanged(
       String text, String lastChapter, String title) async* {
     // if (state is BookmarkInitial || state is BookmarkSetSuccess || state is BookmarkNoContent) {
-      try {
-        BookmarkRepository.setLastPos(text, title, lastChapter);
-        yield BookmarkSetSuccess();
-      } catch (_) {
-        yield BookmarkLoadFailure();
-      }
+    try {
+      BookmarkRepository.setLastPos(text, title, lastChapter);
+      yield BookmarkSetSuccess();
+    } catch (_) {
+      yield BookmarkLoadFailure();
+    }
     // }
   }
 
   Stream<BookmarkState> _getBookmarkFromStore() async* {
     if (state is BookmarkSetSuccess || state is BookmarkInitial) {
       try {
-        Map<String, dynamic> store =
-            await BookmarkRepository.getLastPos();
-        yield BookmarkLoadSuccess(
-            lastChapter: store['lastChapter'],
-            text: store['text'],
-            title: store['title']);
+        Map<String, dynamic> store = await BookmarkRepository.getLastPos();
+
+        if (store['lastChapter'] != null) {
+          yield BookmarkLoadSuccess(
+              lastChapter: store['lastChapter'],
+              text: store['text'],
+              title: store['title']);
+        } else {
+          yield BookmarkNoContent();
+        }
       } catch (_) {
         yield BookmarkNoContent();
       }

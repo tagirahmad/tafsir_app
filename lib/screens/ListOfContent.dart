@@ -3,6 +3,8 @@ import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tafsir_albaqara/bloc/content_bloc/content_bloc.dart';
+import 'package:tafsir_albaqara/statics/global_constants.dart';
+import 'package:tafsir_albaqara/statics/styles.dart';
 import 'package:tafsir_albaqara/ui/ChapterCard.dart';
 import 'package:tafsir_albaqara/ui/DynamicThemeIconButton.dart';
 import 'package:tafsir_albaqara/ui/SettingsIconButton.dart';
@@ -16,7 +18,7 @@ class ListOfContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Список глав'),
+          title: Text(GlobalConstants.listOfContents, style: TextStyle(fontSize: appBarTitleFs),),
           actions: <Widget>[DynamicThemeIconButton(), SettingsIconButton()],
         ),
         body: Container(

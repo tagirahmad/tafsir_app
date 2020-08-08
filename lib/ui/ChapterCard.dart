@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tafsir_albaqara/screens/ContentPage.dart';
+import 'package:tafsir_albaqara/statics/styles.dart';
 
 class ChapterCard extends StatelessWidget {
   final String chapter;
@@ -14,21 +15,18 @@ class ChapterCard extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15)
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: ListTile(
         dense: true,
-        contentPadding: EdgeInsets.all(10),
+        contentPadding: EdgeInsets.fromLTRB(15, 5, 10, 5),
         title: Text(
           '$chapter',
-          style: TextStyle(fontSize: 13),
+          style: TextStyle(fontSize: cardChapterFs),
         ),
         subtitle: Text(
           '$title',
           textAlign: TextAlign.left,
-          style: TextStyle(
-              fontSize: 15),
+          style: TextStyle(fontSize: cardTitleFs),
         ),
         onTap: () {
           Navigator.push(
