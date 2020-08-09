@@ -4,7 +4,7 @@ abstract class ContentEvent extends Equatable {
   const ContentEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => <Object>[];
 }
 
 

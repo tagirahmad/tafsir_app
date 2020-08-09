@@ -4,7 +4,7 @@ abstract class FontSizeEvent extends Equatable {
   const FontSizeEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => <Object>[];
 }
 
 class AppStarted extends FontSizeEvent {}
@@ -12,10 +12,9 @@ class AppStarted extends FontSizeEvent {}
 class FontSizeFontSuccess extends FontSizeEvent {}
 
 class FontSizeChanged extends FontSizeEvent {
+  const FontSizeChanged(this.fontSize);
   final double fontSize;
 
-  const FontSizeChanged(this.fontSize);
-
   @override
-  List<Object> get props => [fontSize];
+  List<Object> get props => <Object>[fontSize];
 }

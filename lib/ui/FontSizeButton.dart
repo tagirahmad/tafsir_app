@@ -7,10 +7,10 @@ class FontSizeButton extends StatelessWidget {
     return IconButton(
       onPressed: () => showDialog<double>(
         context: context,
-        builder: (context) => FontSizePickerDialog(),
+        builder: (BuildContext context) => FontSizePickerDialog(),
       ),
       icon: const Icon(Icons.text_fields),
-      tooltip: "Изменить размер шрифта",
+      tooltip: 'Изменить размер шрифта',
     );
   }
 }

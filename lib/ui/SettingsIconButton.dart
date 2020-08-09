@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tafsir_albaqara/screens/Settings.dart';
+import 'package:tafsir_albaqara/statics/global_constants.dart';
 
 class SettingsIconButton extends StatelessWidget {
   @override
@@ -7,10 +8,12 @@ class SettingsIconButton extends StatelessWidget {
     return IconButton(
       onPressed: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Settings()));
+            context,
+            MaterialPageRoute<void>(
+                builder: (BuildContext context) => Settings()));
       },
       icon: const Icon(Icons.settings),
-      tooltip: "Настройки",
+      tooltip: GlobalConstants.settings,
     );
   }
 }

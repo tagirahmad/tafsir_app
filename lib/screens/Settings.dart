@@ -10,36 +10,36 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Настройки"),
+          title: const Text('Настройки'),
         ),
         body: ListView(
             children: ListTile.divideTiles(
           context: context,
-          tiles: [
+          tiles: <ListTile>[
             ListTile(
-              title: Text("О приложении"),
-              leading: Icon(Icons.assignment),
-              onTap: () => {},
+              title: const Text('О приложении'),
+              leading: const Icon(Icons.assignment),
+              onTap: () => <dynamic>{},
             ),
             ListTile(
-              title: Text("Поделиться"),
-              leading: Icon(Icons.share),
-              onTap: () => {},
+              title: const Text('Поделиться'),
+              leading: const Icon(Icons.share),
+              onTap: () => <dynamic>{},
             ),
             ListTile(
-              title: Text("Обратная связь"),
-              leading: Icon(Icons.email),
-              onTap: () => {},
+              title: const Text('Обратная связь'),
+              leading: const Icon(Icons.email),
+              onTap: () => <dynamic>{},
             ),
             ListTile(
-              title: Text("Другие приложения"),
-              leading: Icon(Icons.grain),
-              onTap: () => {},
+              title: const Text('Другие приложения'),
+              leading: const Icon(Icons.grain),
+              onTap: () => <dynamic>{},
             ),
             ListTile(
-              title: Text("Оценить приложение"),
-              leading: Icon(Icons.star),
-              onTap: () => {},
+              title: const Text('Оценить приложение'),
+              leading: const Icon(Icons.star),
+              onTap: () => <dynamic>{},
             ),
           ],
         ).toList()));

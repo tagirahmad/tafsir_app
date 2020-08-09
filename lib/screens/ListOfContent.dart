@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'dart:async' show Future;
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tafsir_albaqara/bloc/content_bloc/content_bloc.dart';
@@ -18,31 +18,39 @@ class ListOfContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(GlobalConstants.listOfContents, style: TextStyle(fontSize: appBarTitleFs),),
+          title: Text(
+            GlobalConstants.listOfContents,
+            style: TextStyle(fontSize: appBarTitleFs),
+          ),
           actions: <Widget>[DynamicThemeIconButton(), SettingsIconButton()],
         ),
         body: Container(
           child:
               // ignore: missing_return
-              BlocBuilder<ContentBloc, ContentState>(builder: (context, state) {
+              BlocBuilder<ContentBloc, ContentState>(
+                  builder: (BuildContext context, ContentState state) {
             if (state is ContentLoadInProgress) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (state is ContentLoadSuccess) {
               return ListView.builder(
-                itemCount: state.data.length ?? 0,
+                itemCount: state.loadedData.length as int ?? 0,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: <Widget>[
                       ChapterCard(
-                        chapter: state.data[index]['chapter'],
-                        text: state.data[index]['text'],
-                        title: state.data[index]['title']
-                      )  
+                          chapter: state.loadedData[index]['chapter'] as String,
+                          text: state.loadedData[index]['text'] as String,
+                          title: state.loadedData[index]['title'] as String)
                     ],
                   );
                 },
+              );
+            } else {
+              return Container(
+                height: 0,
+                width: 0,
               );
             }
           }),

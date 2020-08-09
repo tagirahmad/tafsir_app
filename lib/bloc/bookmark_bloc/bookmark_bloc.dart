@@ -8,7 +8,7 @@ part 'bookmark_state.dart';
 
 class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
   @override
-  BookmarkState get initialState => BookmarkInitial();
+  BookmarkState get initialState => const BookmarkInitial();
 
   @override
   Stream<BookmarkState> mapEventToState(
@@ -24,26 +24,25 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
 
   Stream<BookmarkState> _mapBookmarkChanged(
       String text, String lastChapter, String title) async* {
-    // if (state is BookmarkInitial || state is BookmarkSetSuccess || state is BookmarkNoContent) {
     try {
       BookmarkRepository.setLastPos(text, title, lastChapter);
       yield BookmarkSetSuccess();
     } catch (_) {
       yield BookmarkLoadFailure();
     }
-    // }
   }
 
   Stream<BookmarkState> _getBookmarkFromStore() async* {
     if (state is BookmarkSetSuccess || state is BookmarkInitial) {
       try {
-        Map<String, dynamic> store = await BookmarkRepository.getLastPos();
+        final Map<String, dynamic> store =
+            await BookmarkRepository.getLastPos();
 
         if (store['lastChapter'] != null) {
           yield BookmarkLoadSuccess(
-              lastChapter: store['lastChapter'],
-              text: store['text'],
-              title: store['title']);
+              lastChapter: store['lastChapter'] as String,
+              text: store['text'] as String,
+              title: store['title'] as String);
         } else {
           yield BookmarkNoContent();
         }

@@ -1,26 +1,21 @@
 part of 'content_bloc.dart';
 
 abstract class ContentState extends Equatable {
-
+  const ContentState(this.data);
   final dynamic data;
-
-  const ContentState(this.data) ;
 }
 
 class ContentLoadInProgress extends ContentState {
-  ContentLoadInProgress(data) : super(data);
+  const ContentLoadInProgress(dynamic data) : super(data);
 
   @override
-  List<Object> get props => [];
-  
+  List<Object> get props => <Object>[];
 }
 
 class ContentLoadSuccess extends ContentState {
-  final dynamic data;
-
-  ContentLoadSuccess(this.data) : super(null);
+  const ContentLoadSuccess(this.loadedData) : super(null);
+  final dynamic loadedData;
 
   @override
-  List<Object> get props => [data];
-  
+  List<Object> get props => <Object>[loadedData];
 }

@@ -13,7 +13,7 @@ class DynamicThemeIconButton extends StatelessWidget {
         }
       },
       icon: const Icon(Icons.brightness_2),
-      tooltip: "Тема",
+      tooltip: 'Тема',
     );
   }
 }

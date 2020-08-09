@@ -1,35 +1,34 @@
 part of 'font_size_bloc.dart';
 
 abstract class FontSizeState extends Equatable {
-  final double fontSize;
   const FontSizeState({this.fontSize});
 
+  final double fontSize;
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => <Object>[];
 }
 
 class FontSizeInitial extends FontSizeState {
-  FontSizeInitial() : super(fontSize: 15);
+  const FontSizeInitial() : super(fontSize: 15);
 
   @override
-  List<Object> get props => [fontSize];
+  List<Object> get props => <Object>[fontSize];
 }
 
 class FontSizeLoadInProgress extends FontSizeState {}
 
 // ignore: must_be_immutable
 class FontSizeLoadSuccess extends FontSizeState {
+  const FontSizeLoadSuccess({this.fontSize});
+
   final double fontSize;
 
-  const FontSizeLoadSuccess({this.fontSize});
-  // const FontSizeLoadISuccess([this.fontSize = const []]);
-
   @override
-  List<Object> get props => [fontSize];
+  List<Object> get props => <Object>[fontSize];
 
   @override
   String toString() => 'FontSizeLoadSuccess { fontSize: $fontSize }';
 }
-
 
 class FontSizeLoadFailure extends FontSizeState {}

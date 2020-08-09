@@ -23,25 +23,28 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return new DynamicTheme(
+    return DynamicTheme(
         defaultBrightness: Brightness.light,
-        data: (brightness) => new ThemeData(
+        data: (Brightness brightness) => ThemeData(
               primarySwatch: Colors.indigo,
               brightness: brightness,
               accentColor: Colors.indigo,
             ),
-        themedWidgetBuilder: (context, theme) {
+        themedWidgetBuilder: (BuildContext context, ThemeData theme) {
           return MultiBlocProvider(
-            providers: [
+            providers: <BlocProvider<dynamic>>[
               BlocProvider<FontSizeBloc>(
-                  create: (context) => FontSizeBloc()..add(AppStarted())),
+                  create: (BuildContext context) =>
+                      FontSizeBloc()..add(AppStarted())),
               BlocProvider<ContentBloc>(
-                create: (context) => ContentBloc()..add(AppLaunched()),
+                create: (BuildContext context) =>
+                    ContentBloc()..add(AppLaunched()),
               ),
               BlocProvider<BookmarkBloc>(
-                  create: (context) => BookmarkBloc()..add(AppStarts()))
+                  create: (BuildContext context) =>
+                      BookmarkBloc()..add(AppStarts()))
             ],
-            child: new MaterialApp(
+            child: MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: theme,
               title: 'Тафсир суры аль-Бакара',
@@ -52,17 +55,14 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-// ignore: must_be_immutable
 class MyHomePage extends StatelessWidget {
-  // double fontSize = 16;
-
-  final Shader linearGradient = LinearGradient(
+  final Shader linearGradient = const LinearGradient(
     colors: <Color>[
       Color(0xFF9683ec),
       Colors.indigoAccent,
       Color(0xFF7630ff),
     ],
-  ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+  ).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class MyHomePage extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Center(
           child: Column(
-            children: [
+            children: <Widget>[
               Flexible(
                   flex: 2,
                   child: Align(
@@ -88,7 +88,7 @@ class MyHomePage extends StatelessWidget {
                       fit: BoxFit.fitWidth,
                       child: Text(
                         GlobalConstants.arabicTitle,
-                        style: new TextStyle(
+                        style: TextStyle(
                             fontSize: homeArabicFs,
                             fontFamily: ArabicFonts.Mirza,
                             package: 'google_fonts_arabic',
@@ -115,7 +115,7 @@ class MyHomePage extends StatelessWidget {
                 ),
               ),
               BlocBuilder<BookmarkBloc, BookmarkState>(
-                builder: (context, state) {
+                builder: (BuildContext context, BookmarkState state) {
                   if (state is BookmarkInitial) {
                     return Container(
                       width: 0,
@@ -132,12 +132,11 @@ class MyHomePage extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
-                      // elevation: 3.0,
                       padding: const EdgeInsets.all(0.0),
                       child: Ink(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: <Color>[
                               Colors.indigoAccent,
                               Color(0xFF7630ff),
@@ -147,10 +146,9 @@ class MyHomePage extends StatelessWidget {
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.5,
                           height: 30,
-                          // padding: const EdgeInsets.all(10.0),
                           alignment: Alignment.center,
                           child: Text(
-                            "Продолжить чтение с: ${state.lastChapter}",
+                            'Продолжить чтение с: ${state.lastChapter}',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: continueReadingBtn),
@@ -160,43 +158,19 @@ class MyHomePage extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => PageContent(
+                            MaterialPageRoute<void>(
+                                builder: (BuildContext context) => PageContent(
                                       chapter: state.lastChapter,
                                       text: state.text,
                                       title: state.title,
                                     )));
                       },
                     ));
-                    //       child: RaisedButton(
-                    //     onPressed: () {},
-                    //     shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(80.0)),
-                    //     padding: const EdgeInsets.all(0.0),
-                    //     child: Ink(
-                    //       decoration: const BoxDecoration(
-                    //         gradient: LinearGradient(
-                    //           colors: <Color>[
-                    //             Colors.indigoAccent,
-                    //             Color(0xFF7630ff),
-                    //           ],
-                    //         ),
-                    //         borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                    //       ),
-                    //       child: Container(
-                    //         constraints: const BoxConstraints(
-                    //             minWidth: 88.0,
-                    //             minHeight:
-                    //                 36.0), // min sizes for Material buttons
-                    //         alignment: Alignment.center,
-                    //         child: const Text(
-                    //           'OK',
-                    //           textAlign: TextAlign.center,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ));
-                    //
+                  } else {
+                    return Container(
+                      height: 0,
+                      width: 0,
+                    );
                   }
                 },
               )

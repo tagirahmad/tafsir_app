@@ -17,13 +17,15 @@ class GradientButton extends StatelessWidget {
         padding: const EdgeInsets.all(0.0),
         // animationDuration: Duration(seconds: 2),
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ListOfContent()));
+          Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                  builder: (BuildContext context) => ListOfContent()));
         },
         child: Ink(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               colors: <Color>[
                 Colors.indigoAccent,
                 Color(0xFF7630ff),

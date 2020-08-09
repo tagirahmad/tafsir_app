@@ -9,7 +9,7 @@ part 'font_size_state.dart';
 
 class FontSizeBloc extends Bloc<FontSizeEvent, FontSizeState> {
   @override
-  FontSizeState get initialState => FontSizeInitial();
+  FontSizeState get initialState => const FontSizeInitial();
 
   @override
   Stream<FontSizeState> mapEventToState(
@@ -25,13 +25,13 @@ class FontSizeBloc extends Bloc<FontSizeEvent, FontSizeState> {
   }
 
   Stream<FontSizeState> _getFontSizeFromStore() async* {
-    double fs = await FontRepository.getFontSize();
+    final double fs = await FontRepository.getFontSize();
     yield FontSizeLoadSuccess(fontSize: fs);
   }
 
   Stream<FontSizeState> _mapFontsSizeLoadedToState() async* {
     try {
-      final fontSize = await FontRepository.getFontSize();
+      final double fontSize = await FontRepository.getFontSize();
       yield FontSizeLoadSuccess(fontSize: fontSize);
     } catch (_) {
       yield FontSizeLoadFailure();
