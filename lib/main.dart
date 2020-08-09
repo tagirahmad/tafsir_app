@@ -6,6 +6,7 @@ import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
 import 'package:tafsir_albaqara/bloc/bookmark_bloc/bookmark_bloc.dart';
 import 'package:tafsir_albaqara/configs/size_config.dart';
 import 'package:tafsir_albaqara/screens/ContentPage.dart';
+import 'package:tafsir_albaqara/services/service_locator.dart';
 import 'package:tafsir_albaqara/statics/global_constants.dart';
 import 'package:tafsir_albaqara/statics/styles.dart';
 import 'package:tafsir_albaqara/ui/DynamicThemeIconButton.dart';
@@ -13,7 +14,10 @@ import 'package:tafsir_albaqara/ui/GradientButton.dart';
 import 'package:tafsir_albaqara/ui/SettingsIconButton.dart';
 import 'package:google_fonts_arabic/fonts.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  setupLocator();
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override

@@ -6,4 +6,10 @@ class GlobalConstants {
   static const String listOfContents = 'Список глав';
   static const String toListOfContents = 'К списку глав';
   static const String settings = 'Настройки';
+  static const String developerEmail = 'tagirbpl@gmail.com';
+  static const String tellAboutBug = 'Сообщить об ошибке/предложении';
+  static const String close = 'Закрыть';
+  static const String feedbackTitle = 'Обратная  связь';
+  static const String feedbackText =
+      'Расскажите о ваших впечатлениях. Если вы обнаружили неполадки или есть предложения, пожалуйста, сообщите о них.';
 }
