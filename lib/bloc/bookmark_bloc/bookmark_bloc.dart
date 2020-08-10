@@ -1,6 +1,9 @@
+// Package imports:
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
+
+// Project imports:
 import 'package:tafsir_albaqara/repository/bookmark_repository.dart';
 
 part 'bookmark_event.dart';

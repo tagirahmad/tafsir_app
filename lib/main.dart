@@ -1,9 +1,15 @@
-import 'package:dynamic_theme/dynamic_theme.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts_arabic/fonts.dart';
+
+// Project imports:
+import 'package:tafsir_albaqara/bloc/bookmark_bloc/bookmark_bloc.dart';
 import 'package:tafsir_albaqara/bloc/content_bloc/content_bloc.dart';
 import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
-import 'package:tafsir_albaqara/bloc/bookmark_bloc/bookmark_bloc.dart';
 import 'package:tafsir_albaqara/configs/size_config.dart';
 import 'package:tafsir_albaqara/screens/content_page.dart';
 import 'package:tafsir_albaqara/services/service_locator.dart';
@@ -12,7 +18,6 @@ import 'package:tafsir_albaqara/statics/styles.dart';
 import 'package:tafsir_albaqara/ui/dynamic_theme_icon_button.dart';
 import 'package:tafsir_albaqara/ui/gradient_button.dart';
 import 'package:tafsir_albaqara/ui/settings_icon_button.dart';
-import 'package:google_fonts_arabic/fonts.dart';
 
 void main() {
   setupLocator();

@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
 import 'package:tafsir_albaqara/statics/global_constants.dart';
 

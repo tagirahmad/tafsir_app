@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:tafsir_albaqara/configs/size_config.dart';
 
 final double homeArabicFs = SizeConfig.safeBlockHorizontal * 30;

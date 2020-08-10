@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:tafsir_albaqara/statics/global_constants.dart';
 import 'package:tafsir_albaqara/ui/font_size_picker_dialog.dart';
 

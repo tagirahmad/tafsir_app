@@ -1,5 +1,10 @@
-import 'package:dynamic_theme/dynamic_theme.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:dynamic_theme/dynamic_theme.dart';
+
+// Project imports:
 import 'package:tafsir_albaqara/statics/global_constants.dart';
 
 class DynamicThemeIconButton extends StatelessWidget {

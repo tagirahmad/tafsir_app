@@ -1,6 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:share/share.dart';
 import 'package:store_redirect/store_redirect.dart';
+
+// Project imports:
 import 'package:tafsir_albaqara/services/calls_messages_service.dart';
 import 'package:tafsir_albaqara/services/material_dialogs.dart';
 import 'package:tafsir_albaqara/services/service_locator.dart';

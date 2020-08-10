@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:tafsir_albaqara/screens/content_page.dart';
 import 'package:tafsir_albaqara/statics/styles.dart';
 

@@ -1,7 +1,14 @@
+// Dart imports:
 import 'dart:async' show Future;
+
+// Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:tafsir_albaqara/bloc/content_bloc/content_bloc.dart';
 import 'package:tafsir_albaqara/statics/global_constants.dart';
 import 'package:tafsir_albaqara/statics/styles.dart';
