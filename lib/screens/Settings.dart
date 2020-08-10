@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'package:store_redirect/store_redirect.dart';
 import 'package:tafsir_albaqara/services/calls_messages_service.dart';
+import 'package:tafsir_albaqara/services/material_dialogs.dart';
 import 'package:tafsir_albaqara/services/service_locator.dart';
 // import 'package:tafsir_albaqara/services/store_redirect.dart';
 // import 'package:tafsir_albaqara/services/store_redirect.dart';
@@ -12,28 +13,6 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void _showMaterialDialog() {
-      showDialog<void>(
-          context: context,
-          builder: (_) => AlertDialog(
-                title: const Text(GlobalConstants.feedbackTitle),
-                content: const Text(GlobalConstants.feedbackText),
-                actions: <Widget>[
-                  FlatButton(
-                      onPressed: () {
-                        _service.sendEmail(GlobalConstants.developerEmail);
-                      },
-                      child: const Text(GlobalConstants.tellAboutBug)),
-                  FlatButton(
-                    child: const Text(GlobalConstants.close),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )
-                ],
-              ));
-    }
-
     return Scaffold(
         appBar: AppBar(
           title: const Text(GlobalConstants.settings),
@@ -43,20 +22,20 @@ class Settings extends StatelessWidget {
           context: context,
           tiles: <ListTile>[
             ListTile(
-              title: const Text('О приложении'),
+              title: const Text(GlobalConstants.aboutAppTitle),
               leading: const Icon(Icons.assignment),
-              onTap: () => <dynamic>{},
+              onTap: () => MaterialDialogs.showAboutAppDialog(context),
             ),
             ListTile(
-              title: const Text('Поделиться'),
+              title: const Text(GlobalConstants.share),
               leading: const Icon(Icons.share),
-              onTap: () =>
-                  Share.share('check out my website https://example.com'),
+              onTap: () => Share.share(GlobalConstants.shareText),
             ),
             ListTile(
-              title: const Text('Обратная связь'),
+              title: const Text(GlobalConstants.feedbackTitle),
               leading: const Icon(Icons.email),
-              onTap: () => _showMaterialDialog(),
+              onTap: () =>
+                  MaterialDialogs.showFeedbackDialog(context, _service),
             ),
             // ListTile(
             //   title: const Text('Другие приложения'),
@@ -64,12 +43,11 @@ class Settings extends StatelessWidget {
             //   onTap: () => <dynamic>{},
             // ),
             ListTile(
-              title: const Text('Оценить приложение'),
+              title: const Text(GlobalConstants.rateApp),
               leading: const Icon(Icons.star),
-              onTap: () =>
-                  StoreRedirect.redirect(
-                      androidAppId: GlobalConstants.androidAppID,
-                      iOSAppId: GlobalConstants.iosAppID),
+              onTap: () => StoreRedirect.redirect(
+                  androidAppId: GlobalConstants.androidAppID,
+                  iOSAppId: GlobalConstants.iosAppID),
             ),
           ],
         ).toList()));
