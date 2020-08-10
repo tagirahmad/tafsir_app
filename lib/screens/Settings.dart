@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
+import 'package:store_redirect/store_redirect.dart';
 import 'package:tafsir_albaqara/services/calls_messages_service.dart';
 import 'package:tafsir_albaqara/services/service_locator.dart';
-import 'package:tafsir_albaqara/services/store_redirect.dart';
+// import 'package:tafsir_albaqara/services/store_redirect.dart';
+// import 'package:tafsir_albaqara/services/store_redirect.dart';
 import 'package:tafsir_albaqara/statics/global_constants.dart';
 
 class Settings extends StatelessWidget {
@@ -64,7 +66,10 @@ class Settings extends StatelessWidget {
             ListTile(
               title: const Text('Оценить приложение'),
               leading: const Icon(Icons.star),
-              onTap: () => StoreRedirect.redirect(androidAppId: 'com.abumaliksoft.kitabattauhid'),
+              onTap: () =>
+                  StoreRedirect.redirect(
+                      androidAppId: GlobalConstants.androidAppID,
+                      iOSAppId: GlobalConstants.iosAppID),
             ),
           ],
         ).toList()));

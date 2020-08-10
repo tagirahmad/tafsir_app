@@ -12,4 +12,6 @@ class GlobalConstants {
   static const String feedbackTitle = 'Обратная  связь';
   static const String feedbackText =
       'Расскажите о ваших впечатлениях. Если вы обнаружили неполадки или есть предложения, пожалуйста, сообщите о них.';
+  static const String androidAppID = 'com.abumaliksoft.kitabattauhid';
+  static const String iosAppID = '585027354';
 }
