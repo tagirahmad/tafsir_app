@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tafsir_albaqara/screens/ContentPage.dart';
+import 'package:tafsir_albaqara/screens/content_page.dart';
 import 'package:tafsir_albaqara/statics/styles.dart';
 
 class ChapterCard extends StatelessWidget {

@@ -1,5 +1,6 @@
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:tafsir_albaqara/statics/global_constants.dart';
 
 class DynamicThemeIconButton extends StatelessWidget {
   @override
@@ -13,7 +14,7 @@ class DynamicThemeIconButton extends StatelessWidget {
         }
       },
       icon: const Icon(Icons.brightness_2),
-      tooltip: 'Тема',
+      tooltip: GlobalConstants.theme,
     );
   }
 }

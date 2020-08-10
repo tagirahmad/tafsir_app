@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
+import 'package:tafsir_albaqara/statics/global_constants.dart';
 
 class FontSizePickerDialog extends StatelessWidget {
   @override
@@ -11,7 +12,7 @@ class FontSizePickerDialog extends StatelessWidget {
     return AlertDialog(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(32.0))),
-      title: const Text('Размер шрифта'),
+      title: const Text(GlobalConstants.fontSize),
       content: BlocBuilder<FontSizeBloc, FontSizeState>(
         builder: (BuildContext context, FontSizeState state) {
           return Container(
@@ -32,7 +33,7 @@ class FontSizePickerDialog extends StatelessWidget {
       ),
       actions: <Widget>[
         FlatButton(
-          child: const Text('Закрыть'),
+          child: const Text(GlobalConstants.close),
           onPressed: () {
             Navigator.pop(context);
           },

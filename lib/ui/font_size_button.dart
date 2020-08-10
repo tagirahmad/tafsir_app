@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tafsir_albaqara/ui/FontSizePickerDialog.dart';
+import 'package:tafsir_albaqara/statics/global_constants.dart';
+import 'package:tafsir_albaqara/ui/font_size_picker_dialog.dart';
 
 class FontSizeButton extends StatelessWidget {
   @override
@@ -10,7 +11,7 @@ class FontSizeButton extends StatelessWidget {
         builder: (BuildContext context) => FontSizePickerDialog(),
       ),
       icon: const Icon(Icons.text_fields),
-      tooltip: 'Изменить размер шрифта',
+      tooltip: GlobalConstants.changeFs,
     );
   }
 }

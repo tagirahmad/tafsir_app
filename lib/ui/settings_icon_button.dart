@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tafsir_albaqara/screens/Settings.dart';
+import 'package:tafsir_albaqara/screens/settings.dart';
 import 'package:tafsir_albaqara/statics/global_constants.dart';
 
 class SettingsIconButton extends StatelessWidget {

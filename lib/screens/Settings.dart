@@ -4,8 +4,6 @@ import 'package:store_redirect/store_redirect.dart';
 import 'package:tafsir_albaqara/services/calls_messages_service.dart';
 import 'package:tafsir_albaqara/services/material_dialogs.dart';
 import 'package:tafsir_albaqara/services/service_locator.dart';
-// import 'package:tafsir_albaqara/services/store_redirect.dart';
-// import 'package:tafsir_albaqara/services/store_redirect.dart';
 import 'package:tafsir_albaqara/statics/global_constants.dart';
 
 class Settings extends StatelessWidget {

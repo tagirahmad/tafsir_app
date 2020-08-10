@@ -6,8 +6,8 @@ import 'package:html/dom.dart' as dom;
 import 'package:tafsir_albaqara/bloc/bookmark_bloc/bookmark_bloc.dart';
 import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
 import 'package:tafsir_albaqara/statics/styles.dart';
-import 'package:tafsir_albaqara/ui/DynamicThemeIconButton.dart';
-import 'package:tafsir_albaqara/ui/FontSizeButton.dart';
+import 'package:tafsir_albaqara/ui/dynamic_theme_icon_button.dart';
+import 'package:tafsir_albaqara/ui/font_size_button.dart';
 
 class PageContent extends StatelessWidget {
   const PageContent(

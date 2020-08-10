@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tafsir_albaqara/bloc/content_bloc/content_bloc.dart';
 import 'package:tafsir_albaqara/statics/global_constants.dart';
 import 'package:tafsir_albaqara/statics/styles.dart';
-import 'package:tafsir_albaqara/ui/ChapterCard.dart';
-import 'package:tafsir_albaqara/ui/DynamicThemeIconButton.dart';
-import 'package:tafsir_albaqara/ui/SettingsIconButton.dart';
+import 'package:tafsir_albaqara/ui/chapter_card.dart';
+import 'package:tafsir_albaqara/ui/dynamic_theme_icon_button.dart';
+import 'package:tafsir_albaqara/ui/settings_icon_button.dart';
 
 class ListOfContent extends StatelessWidget {
   Future<String> loadAsset() async {

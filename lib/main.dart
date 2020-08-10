@@ -5,13 +5,13 @@ import 'package:tafsir_albaqara/bloc/content_bloc/content_bloc.dart';
 import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
 import 'package:tafsir_albaqara/bloc/bookmark_bloc/bookmark_bloc.dart';
 import 'package:tafsir_albaqara/configs/size_config.dart';
-import 'package:tafsir_albaqara/screens/ContentPage.dart';
+import 'package:tafsir_albaqara/screens/content_page.dart';
 import 'package:tafsir_albaqara/services/service_locator.dart';
 import 'package:tafsir_albaqara/statics/global_constants.dart';
 import 'package:tafsir_albaqara/statics/styles.dart';
-import 'package:tafsir_albaqara/ui/DynamicThemeIconButton.dart';
-import 'package:tafsir_albaqara/ui/GradientButton.dart';
-import 'package:tafsir_albaqara/ui/SettingsIconButton.dart';
+import 'package:tafsir_albaqara/ui/dynamic_theme_icon_button.dart';
+import 'package:tafsir_albaqara/ui/gradient_button.dart';
+import 'package:tafsir_albaqara/ui/settings_icon_button.dart';
 import 'package:google_fonts_arabic/fonts.dart';
 
 void main() {
@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: theme,
-              title: 'Тафсир суры аль-Бакара',
+              title: GlobalConstants.russianTitle,
               home: MyHomePage(),
             ),
           );
