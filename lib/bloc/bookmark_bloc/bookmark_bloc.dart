@@ -2,6 +2,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:tafsir_albaqara/models/chapter.dart';
 
 // Project imports:
 import 'package:tafsir_albaqara/repository/bookmark_repository.dart';
@@ -18,17 +19,17 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     BookmarkEvent event,
   ) async* {
     if (event is BookmarkChanged) {
-      yield* _mapBookmarkChanged(event.text, event.lastChapter, event.title);
+      yield* _mapBookmarkChanged(event.chapter);
       yield* _getBookmarkFromStore();
     } else if (event is AppStarts) {
       yield* _getBookmarkFromStore();
     }
   }
 
-  Stream<BookmarkState> _mapBookmarkChanged(
-      String text, String lastChapter, String title) async* {
+  Stream<BookmarkState> _mapBookmarkChanged(Chapter chapter) async* {
     try {
-      BookmarkRepository.setLastPos(text, title, lastChapter);
+      BookmarkRepository.setLastPos(
+          chapter.text, chapter.title, chapter.chapterName);
       yield BookmarkSetSuccess();
     } catch (_) {
       yield BookmarkLoadFailure();
@@ -43,9 +44,10 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
 
         if (store['lastChapter'] != null) {
           yield BookmarkLoadSuccess(
-              lastChapter: store['lastChapter'] as String,
-              text: store['text'] as String,
-              title: store['title'] as String);
+              chapter: Chapter(
+                  chapterName: store['lastChapter'] as String,
+                  title: store['title'] as String,
+                  text: store['text'] as String));
         } else {
           yield BookmarkNoContent();
         }

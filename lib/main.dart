@@ -10,14 +10,14 @@ import 'package:google_fonts_arabic/fonts.dart';
 import 'package:tafsir_albaqara/bloc/bookmark_bloc/bookmark_bloc.dart';
 import 'package:tafsir_albaqara/bloc/content_bloc/content_bloc.dart';
 import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
+import 'package:tafsir_albaqara/components/appbar_actions.dart';
+import 'package:tafsir_albaqara/components/gradient_button.dart';
 import 'package:tafsir_albaqara/configs/size_config.dart';
-import 'package:tafsir_albaqara/screens/content_page.dart';
+import 'package:tafsir_albaqara/models/chapter.dart';
+import 'package:tafsir_albaqara/screens/chapter_screen.dart';
 import 'package:tafsir_albaqara/services/service_locator.dart';
 import 'package:tafsir_albaqara/statics/global_constants.dart';
 import 'package:tafsir_albaqara/statics/styles.dart';
-import 'package:tafsir_albaqara/ui/dynamic_theme_icon_button.dart';
-import 'package:tafsir_albaqara/ui/gradient_button.dart';
-import 'package:tafsir_albaqara/ui/settings_icon_button.dart';
 
 void main() {
   setupLocator();
@@ -82,7 +82,7 @@ class MyHomePage extends StatelessWidget {
           GlobalConstants.russianTitle,
           style: TextStyle(fontSize: appBarTitleFs),
         ),
-        actions: <Widget>[DynamicThemeIconButton(), SettingsIconButton()],
+        actions: appBarActions(AppBarPlace.startPage),
       ),
       body: Container(
         padding: const EdgeInsets.all(10.0),
@@ -157,7 +157,7 @@ class MyHomePage extends StatelessWidget {
                           height: 30,
                           alignment: Alignment.center,
                           child: Text(
-                            'Продолжить чтение с: ${state.lastChapter}',
+                            'Продолжить чтение с: ${state.chapter.chapterName}',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: continueReadingBtn),
@@ -168,11 +168,13 @@ class MyHomePage extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute<void>(
-                                builder: (BuildContext context) => PageContent(
-                                      chapter: state.lastChapter,
-                                      text: state.text,
-                                      title: state.title,
-                                    )));
+                                builder: (BuildContext context) =>
+                                    ChapterScreen(
+                                        chapter: Chapter(
+                                            text: state.chapter.text,
+                                            title: state.chapter.title,
+                                            chapterName:
+                                                state.chapter.chapterName))));
                       },
                     ));
                   } else {

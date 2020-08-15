@@ -22,18 +22,16 @@ class BookmarkNoContent extends BookmarkState {}
 
 // ignore: must_be_immutable
 class BookmarkLoadSuccess extends BookmarkState {
-  const BookmarkLoadSuccess({this.lastChapter, this.text, this.title});
+  const BookmarkLoadSuccess({this.chapter});
 
-  final String lastChapter;
-  final String text;
-  final String title;
+  final Chapter chapter;
 
   @override
-  List<Object> get props => <Object>[lastChapter, text, title];
+  List<Object> get props => <Object>[chapter];
 
   @override
   String toString() =>
-      'BookmarkLoadSuccess { lastChapter: $lastChapter, text: $text, title: $title }';
+      'BookmarkLoadSuccess { lastChapter: ${chapter.chapterName}, text: ${chapter.text}, title: ${chapter.title} }';
 }
 
 class BookmarkLoadFailure extends BookmarkState {}

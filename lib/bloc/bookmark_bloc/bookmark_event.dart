@@ -12,13 +12,10 @@ class AppStarts extends BookmarkEvent {}
 class BookmarkSuccess extends BookmarkEvent {}
 
 class BookmarkChanged extends BookmarkEvent {
-  const BookmarkChanged(
-      {@required this.lastChapter, @required this.text, @required this.title});
+  const BookmarkChanged({@required this.chapter});
 
-  final String lastChapter;
-  final String text;
-  final String title;
+  final Chapter chapter;
 
   @override
-  List<Object> get props => <Object>[lastChapter, text, title];
+  List<Object> get props => <Object>[chapter];
 }

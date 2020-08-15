@@ -10,21 +10,15 @@ import 'package:html/dom.dart' as dom;
 // Project imports:
 import 'package:tafsir_albaqara/bloc/bookmark_bloc/bookmark_bloc.dart';
 import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
+import 'package:tafsir_albaqara/components/appbar_actions.dart';
+import 'package:tafsir_albaqara/components/bookmark_button.dart';
+import 'package:tafsir_albaqara/models/chapter.dart';
 import 'package:tafsir_albaqara/statics/styles.dart';
-import 'package:tafsir_albaqara/ui/dynamic_theme_icon_button.dart';
-import 'package:tafsir_albaqara/ui/font_size_button.dart';
 
-class PageContent extends StatelessWidget {
-  const PageContent(
-      {@required this.text,
-      @required this.title,
-      @required this.chapter,
-      this.lastPos});
+class ChapterScreen extends StatelessWidget {
+  const ChapterScreen({Key key, @required this.chapter}) : super(key: key);
 
-  final String text;
-  final String title;
-  final String chapter;
-  final double lastPos;
+  final Chapter chapter;
 
   @override
   Widget build(BuildContext context) {
@@ -32,22 +26,26 @@ class PageContent extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          chapter,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: appBarTitleFs),
-        ),
-        actions: <Widget>[
-          FontSizeButton(),
-          DynamicThemeIconButton(),
-          IconButton(
-              icon: const Icon(Icons.bookmark),
-              onPressed: () {
-                bookmarkBloc.add(BookmarkChanged(
-                    lastChapter: chapter, text: text, title: title));
-              })
-        ],
-      ),
+          title: Text(
+            chapter.chapterName,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: appBarTitleFs),
+          ),
+          actions: appBarActions(AppBarPlace.chapterScreen) +
+              <Widget>[resolveBookmarkButton(bookmarkBloc, chapter)]
+          //  <Widget>[
+          //   FontSizeButton(),
+          //   DynamicThemeIconButton(),
+          // IconButton(
+          //     icon: const Icon(Icons.bookmark),
+          //     onPressed: () {
+          //       bookmarkBloc.add(BookmarkChanged(
+          //           lastChapter: chapter.chapterName,
+          //           text: chapter.text,
+          //           title: chapter.title));
+          //     })
+          // ],
+          ),
       body: BlocBuilder<FontSizeBloc, FontSizeState>(
         builder: (BuildContext context, FontSizeState state) {
           return SingleChildScrollView(
@@ -62,7 +60,7 @@ class PageContent extends StatelessWidget {
                       padding: const EdgeInsets.all(5.0),
                       child: Center(
                         child: Html(
-                          data: title,
+                          data: chapter.title,
                           defaultTextStyle: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: state.fontSize),
@@ -77,7 +75,7 @@ class PageContent extends StatelessWidget {
                     height: 20.0,
                   ),
                   Html(
-                      data: text,
+                      data: chapter.text,
                       customTextStyle: (dom.Node node, TextStyle baseStyle) {
                         if (node is dom.Element) {
                           switch (node.localName) {

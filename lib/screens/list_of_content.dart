@@ -10,11 +10,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:tafsir_albaqara/bloc/content_bloc/content_bloc.dart';
+import 'package:tafsir_albaqara/components/appbar_actions.dart';
+import 'package:tafsir_albaqara/components/chapter_card.dart';
+import 'package:tafsir_albaqara/models/chapter.dart';
 import 'package:tafsir_albaqara/statics/global_constants.dart';
 import 'package:tafsir_albaqara/statics/styles.dart';
-import 'package:tafsir_albaqara/ui/chapter_card.dart';
-import 'package:tafsir_albaqara/ui/dynamic_theme_icon_button.dart';
-import 'package:tafsir_albaqara/ui/settings_icon_button.dart';
 
 class ListOfContent extends StatelessWidget {
   Future<String> loadAsset() async {
@@ -29,7 +29,7 @@ class ListOfContent extends StatelessWidget {
             GlobalConstants.listOfContents,
             style: TextStyle(fontSize: appBarTitleFs),
           ),
-          actions: <Widget>[DynamicThemeIconButton(), SettingsIconButton()],
+          actions: appBarActions(AppBarPlace.listOfContent),
         ),
         body: Container(
           child:
@@ -47,9 +47,11 @@ class ListOfContent extends StatelessWidget {
                   return Column(
                     children: <Widget>[
                       ChapterCard(
-                          chapter: state.loadedData[index]['chapter'] as String,
-                          text: state.loadedData[index]['text'] as String,
-                          title: state.loadedData[index]['title'] as String)
+                          chapter: Chapter(
+                              text: state.loadedData[index]['text'] as String,
+                              title: state.loadedData[index]['title'] as String,
+                              chapterName:
+                                  state.loadedData[index]['chapter'] as String))
                     ],
                   );
                 },
