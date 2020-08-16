@@ -13,8 +13,8 @@ import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
 import 'package:tafsir_albaqara/components/appbar_actions.dart';
 import 'package:tafsir_albaqara/components/gradient_button.dart';
 import 'package:tafsir_albaqara/configs/size_config.dart';
+import 'package:tafsir_albaqara/models/button_type.dart';
 import 'package:tafsir_albaqara/models/chapter.dart';
-import 'package:tafsir_albaqara/screens/chapter_screen.dart';
 import 'package:tafsir_albaqara/services/service_locator.dart';
 import 'package:tafsir_albaqara/statics/global_constants.dart';
 import 'package:tafsir_albaqara/statics/styles.dart';
@@ -65,14 +65,6 @@ class _MyAppState extends State<MyApp> {
 }
 
 class MyHomePage extends StatelessWidget {
-  final Shader linearGradient = const LinearGradient(
-    colors: <Color>[
-      Color(0xFF9683ec),
-      Colors.indigoAccent,
-      Color(0xFF7630ff),
-    ],
-  ).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -102,7 +94,7 @@ class MyHomePage extends StatelessWidget {
                             fontFamily: ArabicFonts.Mirza,
                             package: 'google_fonts_arabic',
                             fontWeight: FontWeight.bold,
-                            foreground: Paint()..shader = linearGradient),
+                            foreground: Paint()..shader = arabicLinearGradient),
                       ),
                     ),
                   )),
@@ -119,64 +111,26 @@ class MyHomePage extends StatelessWidget {
                           fontWeight: FontWeight.w500),
                       textAlign: TextAlign.left,
                     ),
-                    GradientButton()
+                    const GradientButton(
+                      buttonType: ButtonType.toContentList,
+                      chapter:
+                          Chapter(text: null, title: null, chapterName: null),
+                    )
                   ],
                 ),
               ),
               BlocBuilder<BookmarkBloc, BookmarkState>(
                 builder: (BuildContext context, BookmarkState state) {
-                  if (state is BookmarkInitial) {
-                    return Container(
-                      width: 0,
-                      height: 0,
-                    );
-                  } else if (state is BookmarkNoContent) {
+                  if (state is BookmarkInitial || state is BookmarkNoContent) {
                     return Container(
                       width: 0,
                       height: 0,
                     );
                   } else if (state is BookmarkLoadSuccess) {
                     return Flexible(
-                        child: MaterialButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      padding: const EdgeInsets.all(0.0),
-                      child: Ink(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          gradient: const LinearGradient(
-                            colors: <Color>[
-                              Colors.indigoAccent,
-                              Color(0xFF7630ff),
-                            ],
-                          ),
-                        ),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          height: 30,
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Продолжить чтение с: ${state.chapter.chapterName}',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: continueReadingBtn),
-                          ),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute<void>(
-                                builder: (BuildContext context) =>
-                                    ChapterScreen(
-                                        chapter: Chapter(
-                                            text: state.chapter.text,
-                                            title: state.chapter.title,
-                                            chapterName:
-                                                state.chapter.chapterName))));
-                      },
-                    ));
+                        child: GradientButton(
+                            buttonType: ButtonType.continueReading,
+                            chapter: state.chapter));
                   } else {
                     return Container(
                       height: 0,
