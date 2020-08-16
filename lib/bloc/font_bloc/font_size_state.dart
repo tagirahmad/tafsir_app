@@ -18,11 +18,8 @@ class FontSizeInitial extends FontSizeState {
 
 class FontSizeLoadInProgress extends FontSizeState {}
 
-// ignore: must_be_immutable
 class FontSizeLoadSuccess extends FontSizeState {
-  const FontSizeLoadSuccess({this.fontSize});
-
-  final double fontSize;
+  const FontSizeLoadSuccess({double fontSize}) : super(fontSize: fontSize);
 
   @override
   List<Object> get props => <Object>[fontSize];

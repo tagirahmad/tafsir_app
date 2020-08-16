@@ -42,7 +42,6 @@ class FontSizeBloc extends Bloc<FontSizeEvent, FontSizeState> {
     }
   }
 
-  // ignore: unused_element
   Stream<FontSizeState> _mapFontSizeChanged(double fontSize) async* {
     if (state is FontSizeLoadSuccess) {
       FontRepository.setFontSize(fontSize);
