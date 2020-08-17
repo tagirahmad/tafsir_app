@@ -23,7 +23,7 @@ class ContentBloc extends Bloc<ContentEvent, ContentState> {
   }
 
   Stream<ContentState> _getContent() async* {
-    final dynamic content = await ContentRepository.getContents();
+    final dynamic content = await ContentJsonRepository().getContents();
     yield ContentLoadSuccess(content);
   }
 }

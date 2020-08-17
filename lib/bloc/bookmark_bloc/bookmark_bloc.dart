@@ -28,8 +28,8 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
 
   Stream<BookmarkState> _mapBookmarkChanged(Chapter chapter) async* {
     try {
-      BookmarkRepository.setLastPos(
-          chapter.text, chapter.title, chapter.chapterName);
+      BookmarkLocalRepository()
+          .setLastPos(chapter.text, chapter.title, chapter.chapterName);
       yield BookmarkSetSuccess();
     } catch (_) {
       yield BookmarkLoadFailure();
@@ -40,7 +40,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     if (state is BookmarkSetSuccess || state is BookmarkInitial) {
       try {
         final Map<String, dynamic> store =
-            await BookmarkRepository.getLastPos();
+            await BookmarkLocalRepository().getLastPos();
 
         if (store['lastChapter'] != null) {
           yield BookmarkLoadSuccess(

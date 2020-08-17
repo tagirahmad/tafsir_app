@@ -29,13 +29,13 @@ class FontSizeBloc extends Bloc<FontSizeEvent, FontSizeState> {
   }
 
   Stream<FontSizeState> _getFontSizeFromStore() async* {
-    final double fs = await FontRepository.getFontSize();
+    final double fs = await FontLocalRepository().getFontSize();
     yield FontSizeLoadSuccess(fontSize: fs);
   }
 
   Stream<FontSizeState> _mapFontsSizeLoadedToState() async* {
     try {
-      final double fontSize = await FontRepository.getFontSize();
+      final double fontSize = await FontLocalRepository().getFontSize();
       yield FontSizeLoadSuccess(fontSize: fontSize);
     } catch (_) {
       yield FontSizeLoadFailure();
@@ -44,10 +44,10 @@ class FontSizeBloc extends Bloc<FontSizeEvent, FontSizeState> {
 
   Stream<FontSizeState> _mapFontSizeChanged(double fontSize) async* {
     if (state is FontSizeLoadSuccess) {
-      FontRepository.setFontSize(fontSize);
+      FontLocalRepository().setFontSize(fontSize);
       yield FontSizeLoadSuccess(fontSize: fontSize);
     } else if (state is FontSizeInitial) {
-      FontRepository.setFontSize(fontSize);
+      FontLocalRepository().setFontSize(fontSize);
       yield FontSizeLoadSuccess(fontSize: fontSize);
     }
   }
