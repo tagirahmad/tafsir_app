@@ -11,8 +11,11 @@ class MaterialDialogs {
         context: context,
         builder: (_) => const AlertDialog(
               title: Text(GlobalConstants.aboutAppTitle),
-              content:
-                  SingleChildScrollView(child: Text(GlobalConstants.aboutApp)),
+              content: SingleChildScrollView(
+                  child: Text(
+                GlobalConstants.aboutApp,
+                textAlign: TextAlign.center,
+              )),
             ));
   }
 
