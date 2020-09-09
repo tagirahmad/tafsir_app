@@ -27,6 +27,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
   }
 
   Stream<BookmarkState> _mapBookmarkChanged(Chapter chapter) async* {
+    yield BookmarkLoadInProgress();
     try {
       BookmarkLocalRepository()
           .setLastPos(chapter.text, chapter.title, chapter.chapterName);

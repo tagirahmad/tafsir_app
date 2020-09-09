@@ -32,7 +32,7 @@ class ChapterScreen extends StatelessWidget {
             style: TextStyle(fontSize: appBarTitleFs),
           ),
           actions: appBarActions(AppBarPlace.chapterScreen) +
-              <Widget>[resolveBookmarkButton(bookmarkBloc, chapter)]),
+              <Widget>[resolveBookmarkButton(bookmarkBloc, chapter, context)]),
       body: BlocBuilder<FontSizeBloc, FontSizeState>(
         builder: (BuildContext context, FontSizeState state) {
           return SingleChildScrollView(

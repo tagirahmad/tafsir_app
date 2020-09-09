@@ -9,6 +9,7 @@ class GlobalConstants {
   static const String russianTitle = 'Тафсир Суры аль-Бакара';
   static const String listOfContents = 'Список глав';
   static const String toListOfContents = 'К списку глав';
+  static const String lastPosSaved = 'Последняя позиция сохранена';
   static const String settings = 'Настройки';
   static const String developerEmail = 'tagirbpl@gmail.com';
   static const String tellAboutBug = 'Сообщить об ошибке/предложении';
