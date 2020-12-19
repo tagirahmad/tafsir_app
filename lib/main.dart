@@ -30,9 +30,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final FontSizeBloc _fontSizeBloc = FontSizeBloc();
-  final ContentBloc _contentBloc = ContentBloc();
-  final BookmarkBloc _bookmarkBloc = BookmarkBloc();
+  final FontSizeBloc _fontSizeBloc = FontSizeBloc(const FontSizeInitial());
+  final ContentBloc _contentBloc = ContentBloc(const ContentLoadInProgress(null));
+  final BookmarkBloc _bookmarkBloc = BookmarkBloc(const BookmarkInitial());
 
   @override
   Widget build(BuildContext context) {
