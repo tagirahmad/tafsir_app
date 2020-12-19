@@ -12,7 +12,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_html: ^0.11.1
   dynamic_theme:
-  shared_preferences: ^0.5.12+4
+  shared_preferences: ^0.5.12+2
   bloc: ^6.1.1
   equatable: ^1.2.0
   flutter_bloc: ^6.1.1

@@ -49,7 +49,11 @@ class FontSizeBloc extends Bloc<FontSizeEvent, FontSizeState> {
   }
 
   Stream<FontSizeState> _getFontSizeFromStore() async* {
-    final double fs = await FontLocalRepository().getFontSize();
-    yield FontSizeLoadSuccess(fontSize: fs);
+    try {
+      final double fs = await FontLocalRepository().getFontSize();
+      yield FontSizeLoadSuccess(fontSize: fs);
+    } catch (e) {
+      yield FontSizeLoadFailure();
+    }
   }
 }

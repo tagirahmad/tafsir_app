@@ -1,12 +1,16 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart' as flutter_test;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
 import 'package:test/test.dart';
 
-class MockFontSizeBloc extends MockBloc<FontSizeState> implements FontSizeBloc {}
+class MockFontSizeBloc extends MockBloc<FontSizeState> implements FontSizeBloc {
+}
 
 void main() {
   flutter_test.TestWidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences.setMockInitialValues({});
+
   group('FontSizeBloc', () {
     // MockFontSizeBloc fontSizeBloc;
     FontSizeBloc fontSizeBloc;
@@ -27,7 +31,15 @@ void main() {
     blocTest<FontSizeBloc, FontSizeState>(
         'FontSizeBloc should yield FontSizeLoadSuccess(fontSize: fs) when AppStarted',
         build: () => fontSizeBloc,
-        act: (dynamic bloc) => bloc.add(AppStarted()),
-        expect: <FontSizeState>[const FontSizeLoadSuccess(fontSize: 15)]);
+        act: (FontSizeBloc bloc) => bloc.add(AppStarted()),
+        expect: <FontSizeState>[const FontSizeLoadSuccess(fontSize: 15)],
+    );
+
+    blocTest<FontSizeBloc, FontSizeState>(
+        'FontSizeBloc should yield FontSizeLoadSuccess(fontSize: fs) when FontSizeChanged',
+        build: () => fontSizeBloc,
+        act: (FontSizeBloc bloc) => bloc.add(const FontSizeChanged(17)),
+        expect: <FontSizeState>[const FontSizeLoadSuccess(fontSize: 17)]);
+
   });
 }
