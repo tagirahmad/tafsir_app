@@ -4,19 +4,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tafsir_albaqara/bloc/font_bloc/font_size_bloc.dart';
 import 'package:test/test.dart';
 
-class MockFontSizeBloc extends MockBloc<FontSizeState> implements FontSizeBloc {
-}
-
 void main() {
   flutter_test.TestWidgetsFlutterBinding.ensureInitialized();
   SharedPreferences.setMockInitialValues({});
 
   group('FontSizeBloc', () {
-    // MockFontSizeBloc fontSizeBloc;
     FontSizeBloc fontSizeBloc;
 
     setUp(() {
-      // fontSizeBloc = MockFontSizeBloc(const FontSizeInitial());
       fontSizeBloc = FontSizeBloc(const FontSizeInitial());
     });
 
@@ -40,6 +35,5 @@ void main() {
         build: () => fontSizeBloc,
         act: (FontSizeBloc bloc) => bloc.add(const FontSizeChanged(17)),
         expect: <FontSizeState>[const FontSizeLoadSuccess(fontSize: 17)]);
-
   });
 }
