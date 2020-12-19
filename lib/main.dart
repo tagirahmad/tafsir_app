@@ -35,6 +35,14 @@ class _MyAppState extends State<MyApp> {
   final BookmarkBloc _bookmarkBloc = BookmarkBloc();
 
   @override
+  void dispose() {
+    _fontSizeBloc.close();
+    _contentBloc.close();
+    _bookmarkBloc.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return DynamicTheme(
         defaultBrightness: Brightness.light,
