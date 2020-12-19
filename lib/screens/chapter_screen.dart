@@ -25,20 +25,22 @@ class ChapterScreen extends StatelessWidget {
     final BookmarkBloc bookmarkBloc = BlocProvider.of<BookmarkBloc>(context);
 
     return Scaffold(
-      appBar: AppBar(
-          title: Text(
-            chapter.chapterName,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: appBarTitleFs),
-          ),
-          actions: appBarActions(AppBarPlace.chapterScreen) +
-              <Widget>[resolveBookmarkButton(bookmarkBloc, chapter, context)]),
-      body: BlocBuilder<FontSizeBloc, FontSizeState>(
-        builder: (BuildContext context, FontSizeState state) {
-          return SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
-              child: Column(
+        appBar: AppBar(
+            title: Text(
+              chapter.chapterName,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: appBarTitleFs),
+            ),
+            actions: appBarActions(AppBarPlace.chapterScreen) +
+                <Widget>[
+                  resolveBookmarkButton(bookmarkBloc, chapter, context)
+                ]),
+        body: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+            child: BlocBuilder<FontSizeBloc, FontSizeState>(
+                builder: (BuildContext context, FontSizeState state) {
+              return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
@@ -74,7 +76,12 @@ class ChapterScreen extends StatelessWidget {
                               return TextStyle(
                                   fontSize: state.fontSize + 3,
                                   fontWeight: FontWeight.bold);
+                            default:
+                              return null;
                           }
+                        }
+                        else {
+                          return null;
                         }
                       },
                       defaultTextStyle: TextStyle(
@@ -87,15 +94,18 @@ class ChapterScreen extends StatelessWidget {
                               return TextAlign.center;
                             case 'h3':
                               return TextAlign.center;
+                            default:
+                              return TextAlign.left;
                           }
+                        }
+                        else {
+                          return null;
                         }
                       })
                 ],
-              ),
-            ),
-          );
-        },
-      ),
-    );
+              );
+            }),
+          ),
+        ));
   }
 }
