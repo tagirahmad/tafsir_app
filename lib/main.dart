@@ -30,6 +30,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final FontSizeBloc _fontSizeBloc = FontSizeBloc();
+  final ContentBloc _contentBloc = ContentBloc();
+  final BookmarkBloc _bookmarkBloc = BookmarkBloc();
+
   @override
   Widget build(BuildContext context) {
     return DynamicTheme(
@@ -44,14 +48,14 @@ class _MyAppState extends State<MyApp> {
             providers: <BlocProvider<dynamic>>[
               BlocProvider<FontSizeBloc>(
                   create: (BuildContext context) =>
-                      FontSizeBloc()..add(AppStarted())),
+                  _fontSizeBloc..add(AppStarted())),
               BlocProvider<ContentBloc>(
                 create: (BuildContext context) =>
-                    ContentBloc()..add(AppLaunched()),
+                    _contentBloc..add(AppLaunched()),
               ),
               BlocProvider<BookmarkBloc>(
                   create: (BuildContext context) =>
-                      BookmarkBloc()..add(AppStarts()))
+                  _bookmarkBloc..add(AppStarts()))
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
