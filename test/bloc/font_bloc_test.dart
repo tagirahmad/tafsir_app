@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 
 void main() {
   flutter_test.TestWidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.setMockInitialValues({});
+  SharedPreferences.setMockInitialValues(<String, dynamic>{});
 
   group('FontSizeBloc', () {
     FontSizeBloc fontSizeBloc;
@@ -24,10 +24,10 @@ void main() {
     });
 
     blocTest<FontSizeBloc, FontSizeState>(
-        'FontSizeBloc should yield FontSizeLoadSuccess(fontSize: fs) when AppStarted',
-        build: () => fontSizeBloc,
-        act: (FontSizeBloc bloc) => bloc.add(AppStarted()),
-        expect: <FontSizeState>[const FontSizeLoadSuccess(fontSize: 15)],
+      'FontSizeBloc should yield FontSizeLoadSuccess(fontSize: fs) when AppStarted',
+      build: () => fontSizeBloc,
+      act: (FontSizeBloc bloc) => bloc.add(AppStarted()),
+      expect: <FontSizeState>[const FontSizeLoadSuccess(fontSize: 15)],
     );
 
     blocTest<FontSizeBloc, FontSizeState>(
