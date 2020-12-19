@@ -11,7 +11,8 @@ part 'bookmark_event.dart';
 part 'bookmark_state.dart';
 
 class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
-  @override
+  BookmarkBloc(BookmarkState initialState) : super(initialState);
+
   BookmarkState get initialState => const BookmarkInitial();
 
   @override

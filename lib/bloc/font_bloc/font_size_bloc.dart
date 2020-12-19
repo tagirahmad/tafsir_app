@@ -12,7 +12,8 @@ part 'font_size_event.dart';
 part 'font_size_state.dart';
 
 class FontSizeBloc extends Bloc<FontSizeEvent, FontSizeState> {
-  @override
+  FontSizeBloc(FontSizeState initialState) : super(initialState);
+
   FontSizeState get initialState => const FontSizeInitial();
 
   @override

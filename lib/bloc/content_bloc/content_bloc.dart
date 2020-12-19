@@ -12,7 +12,8 @@ part 'content_event.dart';
 part 'content_state.dart';
 
 class ContentBloc extends Bloc<ContentEvent, ContentState> {
-  @override
+  ContentBloc(ContentState initialState) : super(initialState);
+
   ContentState get initialState => const ContentLoadInProgress(null);
 
   @override
