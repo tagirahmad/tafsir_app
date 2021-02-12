@@ -41,6 +41,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
   Stream<BookmarkState> _getBookmarkFromStore() async* {
     if (state is BookmarkSetSuccess || state is BookmarkInitial) {
       try {
+        yield BookmarkLoadInProgress();
         final Map<String, dynamic> store =
             await BookmarkLocalRepository().getLastPos();
 
@@ -54,7 +55,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
           yield BookmarkNoContent();
         }
       } catch (_) {
-        yield BookmarkNoContent();
+        yield BookmarkLoadFailure();
       }
     }
   }

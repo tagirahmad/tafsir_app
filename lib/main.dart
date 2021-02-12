@@ -1,8 +1,7 @@
 // Flutter imports:
-import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts_arabic/fonts.dart';
 
@@ -31,7 +30,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final FontSizeBloc _fontSizeBloc = FontSizeBloc(const FontSizeInitial());
-  final ContentBloc _contentBloc = ContentBloc(const ContentLoadInProgress(null));
+  final ContentBloc _contentBloc =
+      ContentBloc(const ContentLoadInProgress(null));
   final BookmarkBloc _bookmarkBloc = BookmarkBloc(const BookmarkInitial());
 
   @override
@@ -48,14 +48,14 @@ class _MyAppState extends State<MyApp> {
             providers: <BlocProvider<dynamic>>[
               BlocProvider<FontSizeBloc>(
                   create: (BuildContext context) =>
-                  _fontSizeBloc..add(AppStarted())),
+                      _fontSizeBloc..add(AppStarted())),
               BlocProvider<ContentBloc>(
                 create: (BuildContext context) =>
                     _contentBloc..add(AppLaunched()),
               ),
               BlocProvider<BookmarkBloc>(
                   create: (BuildContext context) =>
-                  _bookmarkBloc..add(AppStarts()))
+                      _bookmarkBloc..add(AppStarts()))
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
@@ -135,6 +135,10 @@ class MyHomePage extends StatelessWidget {
                         child: GradientButton(
                             buttonType: ButtonType.continueReading,
                             chapter: state.chapter));
+                  } else if (state is BookmarkLoadInProgress) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
                   } else {
                     return Container(
                       height: 0,
